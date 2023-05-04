@@ -62,6 +62,17 @@
             android:textColorHint="#00AEFF"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/resetPasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot my Password"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:textColor="#FF0000"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

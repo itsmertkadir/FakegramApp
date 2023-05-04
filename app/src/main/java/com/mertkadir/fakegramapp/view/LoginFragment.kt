@@ -63,6 +63,13 @@ class LoginFragment : Fragment() {
 
         }
 
+        binding.resetPasswordText.setOnClickListener {
+
+            val action = LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment()
+            Navigation.findNavController(it).navigate(action)
+
+        }
+
     }
 
 }
