@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -56,8 +57,9 @@ class LoginFragment : Fragment() {
         }
 
         binding.register.setOnClickListener {
-            val intent = Intent(it.context,RegisterActivity::class.java)
-            startActivity(intent)
+
+            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+            Navigation.findNavController(it).navigate(action)
 
         }
 
