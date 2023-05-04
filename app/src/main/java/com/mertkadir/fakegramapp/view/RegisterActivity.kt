@@ -27,14 +27,14 @@ class RegisterActivity : AppCompatActivity() {
         //Init
         auth = Firebase.auth
 
-        /*
+
         if (auth != null){
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-         */
+
 
 
 
