@@ -53,6 +53,7 @@ class RegisterFragment : Fragment() {
 
                 auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {authResult ->
 
+
                     val intent = Intent(it.context,MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
@@ -62,9 +63,6 @@ class RegisterFragment : Fragment() {
                 }
 
             }
-
-
-
         }
 
         binding.loginTextView.setOnClickListener {

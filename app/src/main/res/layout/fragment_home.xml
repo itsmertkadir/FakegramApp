@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.HomeFragment">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="409dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/homePage"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/home_36" />
+
+        <ImageView
+            android:id="@+id/addPage"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/add_36" />
+
+        <ImageView
+            android:id="@+id/profilePage"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/user_36" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
