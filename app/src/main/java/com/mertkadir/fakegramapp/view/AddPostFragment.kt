@@ -1,12 +1,10 @@
 package com.mertkadir.fakegramapp.view
 
 import android.Manifest
-import android.app.appsearch.AppSearchResult.RESULT_OK
-import android.content.ContentResolver
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,9 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
+
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
@@ -31,7 +28,7 @@ class AddPostFragment : Fragment() {
     private lateinit var binding : FragmentAddPostBinding
     private lateinit var resultActivityLauncher : ActivityResultLauncher<Intent>
     private lateinit var permissionLauncher : ActivityResultLauncher<String>
-    var selectedBitmap : Bitmap? = null
+    private  var selectedImage : Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,33 +113,11 @@ class AddPostFragment : Fragment() {
         resultActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
             if (result.resultCode == RESULT_OK){
                 val intentFromResult = result.data
-
                 if (intentFromResult != null){
+                    selectedImage = intentFromResult.data
 
-                    val imageData = intentFromResult.data
-
-                    if (imageData != null){
-
-                        try {
-
-                            if (Build.VERSION.SDK_INT >= 28){
-
-
-                                    val source = ImageDecoder.createSource(this.requireActivity().contentResolver, imageData)
-                                    selectedBitmap = ImageDecoder.decodeBitmap(source)
-                                    binding.selectImage.setImageBitmap(selectedBitmap)
-
-
-                            }else{
-                                selectedBitmap = MediaStore.Images.Media.getBitmap(this.requireActivity().contentResolver,imageData)
-                                binding.selectImage.setImageBitmap(selectedBitmap)
-                            }
-
-
-                        }catch (e: Exception){
-                            e.localizedMessage
-                        }
-
+                    selectedImage.let {
+                        binding.selectImage.setImageURI(it)
                     }
 
                 }
