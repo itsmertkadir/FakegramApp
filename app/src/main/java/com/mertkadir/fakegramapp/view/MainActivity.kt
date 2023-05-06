@@ -2,6 +2,8 @@ package com.mertkadir.fakegramapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mertkadir.fakegramapp.adapter.HomeFragmentRecyclerViewAdapter
 import com.mertkadir.fakegramapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
