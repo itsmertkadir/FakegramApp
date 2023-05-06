@@ -47,10 +47,14 @@ class ProfileSettingsFragment : Fragment() {
         }
 
         binding.signOut.setOnClickListener{
+            auth.signOut()
+                val intent = Intent(requireActivity().applicationContext,RegisterActivity::class.java)
+                requireActivity().startActivity(intent)
+                requireActivity().finish()
 
         }
 
-
+g
     }
 
 

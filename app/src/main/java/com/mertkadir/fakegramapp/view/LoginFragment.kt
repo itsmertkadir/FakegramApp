@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
         if (auth != null){
             val intent = Intent(this.context,MainActivity::class.java)
             startActivity(intent)
-            requireActivity().finish()
+
         }
 
     }
