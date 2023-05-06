@@ -35,9 +35,14 @@ class ProfileFragment : Fragment() {
             val action = ProfileFragmentDirections.actionProfileFragmentToAddPostFragment2()
             Navigation.findNavController(it).navigate(action)
         }
+
         binding.homePage.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToHomeFragment()
             Navigation.findNavController(it).navigate(action)
+        }
+
+        binding.settingView.setOnClickListener {
+            println("Tiklandi")
         }
 
     }

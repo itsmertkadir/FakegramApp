@@ -8,6 +8,49 @@
     tools:context=".view.ProfileFragment">
 
 
+    <ImageView
+        android:id="@+id/settingView"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+       android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/userprofileimage" />
+
+        <TextView
+            android:id="@+id/userNameProfile"
+            android:layout_width="143dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:maxLength="23"
+            android:text="mrkadir9395"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="409dp"
@@ -44,13 +87,4 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:text="Profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
