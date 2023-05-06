@@ -11,10 +11,12 @@
         tools:layout="@layout/fragment_add_post" >
         <action
             android:id="@+id/action_addPostFragment2_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_addPostFragment2_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -23,10 +25,12 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_addPostFragment2"
-            app:destination="@id/addPostFragment2" />
+            app:destination="@id/addPostFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -35,9 +39,33 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_profileFragment_to_addPostFragment2"
-            app:destination="@id/addPostFragment2" />
+            app:destination="@id/addPostFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_profileFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.mertkadir.fakegramapp.view.ProfileSettingsFragment"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" >
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_registerActivity"
+            app:destination="@id/registerActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.mertkadir.fakegramapp.view.RegisterActivity"
+        android:label="activity_register"
+        tools:layout="@layout/activity_register" />
 </navigation>

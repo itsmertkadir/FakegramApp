@@ -23,6 +23,11 @@ class LoginFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         auth = Firebase.auth
+        if (auth != null){
+            val intent = Intent(this.context,MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
 
     }
 
