@@ -21,7 +21,6 @@ class HomeFragmentRecyclerViewAdapter(private val postList : ArrayList<Posts>) :
 
         holder.binding.userEmailTextView.text = postList.get(position).email
         holder.binding.commentTextView.text = postList.get(position).comment
-        holder.binding.dateTextView.text = postList.get(position).date
 
     }
 

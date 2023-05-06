@@ -34,10 +34,8 @@ class HomeFragment : Fragment() {
         postArrayList = ArrayList<Posts>()
 
         getData()
-        
-        binding.recyclerView.layoutManager = LinearLayoutManager(this@HomeFragment.context)
-        homeFragmentAdapter = HomeFragmentRecyclerViewAdapter(postArrayList)
-        binding.recyclerView.adapter = homeFragmentAdapter
+
+
 
     }
 
@@ -51,6 +49,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this@HomeFragment.context)
+        homeFragmentAdapter = HomeFragmentRecyclerViewAdapter(postArrayList)
+        binding.recyclerView.adapter = homeFragmentAdapter
 
         binding.addPage.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToAddPostFragment2()
@@ -82,11 +84,7 @@ class HomeFragment : Fragment() {
                             val comment = document.get("comment") as String
                             val userEmail = document.get("userEmail") as String
                             val downloadUrl = document.get("downloadUrl")as String
-                            val date = document.get("date") as Timestamp
-
-                            val posts = Posts(userEmail,comment,downloadUrl,date.let {
-                                it.toString()
-                            })
+                            val posts = Posts(userEmail,comment,downloadUrl)
                             postArrayList.add(posts)
                         }
 
