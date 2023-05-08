@@ -30,20 +30,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/userImageEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/userprofileimage" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userEditImage"
+            android:layout_width="150dp"
+
+            android:layout_height="150dp"
+            android:background="@drawable/userprofileimage"></de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
-            android:id="@+id/userNameEdit"
-            android:layout_width="143dp"
-            android:layout_height="41dp"
+            android:id="@+id/userProfileEmailEdit"
+            android:layout_width="276dp"
+            android:layout_height="36dp"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:maxLength="23"
             android:maxLines="1"
             android:text="mrkadir9395"
             android:textAlignment="center"

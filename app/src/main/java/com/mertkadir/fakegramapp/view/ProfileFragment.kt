@@ -19,6 +19,7 @@ import com.mertkadir.fakegramapp.adapter.HomeFragmentRecyclerViewAdapter
 import com.mertkadir.fakegramapp.adapter.ProfileFragmentRecyclerViewAdapter
 import com.mertkadir.fakegramapp.databinding.FragmentProfileBinding
 import com.mertkadir.fakegramapp.model.Posts
+import com.squareup.picasso.Picasso
 
 
 class ProfileFragment : Fragment() {
@@ -58,6 +59,7 @@ class ProfileFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         profileFragmentAdapter = ProfileFragmentRecyclerViewAdapter(postArrayList)
         binding.recyclerView.adapter = profileFragmentAdapter
+
 
         binding.addPage.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToAddPostFragment2()
@@ -102,6 +104,34 @@ class ProfileFragment : Fragment() {
                         }
 
                         profileFragmentAdapter.notifyDataSetChanged()
+
+                    }
+
+                }
+            }
+
+        }
+
+        db.collection("UserDetails").whereEqualTo("userEmail",auth.currentUser!!.email).addSnapshotListener { value, error ->
+
+            if (error != null){
+                Toast.makeText(this.context, error.localizedMessage, Toast.LENGTH_LONG).show()
+            }else{
+                if (value != null){
+
+                    if (!value.isEmpty){
+
+                        val documents = value.documents
+
+
+                        for (document in documents){
+
+                            val userEmail = document.get("userEmail") as String
+                            val downloadUrl = document.get("userProfileImage")as String
+                            Picasso.get().load(downloadUrl).into(binding.userEditImage)
+
+                        }
+
 
                     }
 

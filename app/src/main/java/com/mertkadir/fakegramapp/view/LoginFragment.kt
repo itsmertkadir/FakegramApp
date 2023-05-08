@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         auth = Firebase.auth
-        if (auth != null){
+        if (auth.currentUser != null){
             val intent = Intent(this.context,MainActivity::class.java)
             startActivity(intent)
 
@@ -45,11 +45,11 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.loginbutton.setOnClickListener {
-            val emilText = binding.editTextEmailLogin.text.toString()
+            val emailText = binding.editTextEmailLogin.text.toString()
             val passwordText = binding.editTextPasswordLogin.text.toString()
 
 
-            auth.signInWithEmailAndPassword(emilText,passwordText).addOnSuccessListener {
+            auth.signInWithEmailAndPassword(emailText,passwordText).addOnSuccessListener {
 
                 val intent = Intent(view.context,MainActivity::class.java)
                 startActivity(intent)
