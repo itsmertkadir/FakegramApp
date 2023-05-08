@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +19,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -30,10 +33,10 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 
 import com.mertkadir.fakegramapp.databinding.FragmentProfileSettingsBinding
-import com.mertkadir.fakegramapp.model.Posts
+
 
 import com.mertkadir.fakegramapp.model.UserDetails
-import com.squareup.picasso.Picasso
+
 
 
 class ProfileSettingsFragment : Fragment() {
@@ -46,6 +49,7 @@ class ProfileSettingsFragment : Fragment() {
     private lateinit var permissionLauncher : ActivityResultLauncher<String>
     private  var selectedImage : Uri? = null
     private lateinit var userDetailsArray: ArrayList<UserDetails>
+
 
 
 
@@ -113,7 +117,10 @@ class ProfileSettingsFragment : Fragment() {
                             userDetail.put("userUUID", userUUID)
                             userDetail.put("userProfileImage",userProfileImageDownload)
 
-                            fireStore.collection("UserDetails").add(userDetail).addOnSuccessListener {
+
+
+
+                            fireStore.collection("UserInfo").document(auth.currentUser!!.uid).set(userDetail).addOnSuccessListener {
 
                                 Toast.makeText(this.context, "Update User Details", Toast.LENGTH_SHORT).show()
                             }.addOnFailureListener {
@@ -203,32 +210,19 @@ class ProfileSettingsFragment : Fragment() {
 
 
     private fun getData(){
-      fireStore.collection("UserDetails").whereEqualTo("userEmail",auth.currentUser!!.email).addSnapshotListener { value, error ->
-
-          if (error != null){
-              Toast.makeText(this.context, error.localizedMessage, Toast.LENGTH_SHORT).show()
-          }else{
-
-              if (value != null){
-
-                  if (!value.isEmpty){
-                      val documents = value.documents
-
-                      for (document in documents){
-
-                          val userEmail = document.get("userEmail") as String
-                          val downloadUrl = document.get("userProfileImage") as String
-                          val userDetails = UserDetails(userEmail,downloadUrl)
-                          userDetailsArray.add(userDetails)
-                          Picasso.get().load(userDetails.userProfileImage).into(binding.userImageEdit)
-                      }
-                  }
-
-              }
-
-          }
-
-      }
+        fireStore.collection("UserInfo").whereEqualTo("userEmail",auth.currentUser!!.email).get(Source.SERVER).addOnCompleteListener {
+                if(it.isSuccessful && !it.result.documents.isNullOrEmpty()) {
+                    val mail = it.result.documents[0].getString("userEmail") as String
+                    val image = it.result.documents[0].getString("userProfileImage") as String
+                    val userDetails = UserDetails(mail,image)
+                    Log.i("API-TEST", image)
+                    userDetailsArray.add(userDetails)
+                    Glide
+                        .with(requireActivity())
+                        .load(image)
+                        .into(binding.userImageEdit)
+                }
+            }
     }
     private fun registerLauncher(){
 

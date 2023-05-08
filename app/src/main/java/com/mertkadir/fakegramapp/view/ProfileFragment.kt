@@ -1,6 +1,7 @@
 package com.mertkadir.fakegramapp.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +14,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.mertkadir.fakegramapp.R
-import com.mertkadir.fakegramapp.adapter.HomeFragmentRecyclerViewAdapter
 import com.mertkadir.fakegramapp.adapter.ProfileFragmentRecyclerViewAdapter
 import com.mertkadir.fakegramapp.databinding.FragmentProfileBinding
 import com.mertkadir.fakegramapp.model.Posts
-import com.squareup.picasso.Picasso
+import com.mertkadir.fakegramapp.model.UserDetails
+
 
 
 class ProfileFragment : Fragment() {
@@ -31,6 +32,7 @@ class ProfileFragment : Fragment() {
     private lateinit var postArrayList : ArrayList<Posts>
     private lateinit var profileFragmentAdapter : ProfileFragmentRecyclerViewAdapter
     private lateinit var currentUserEmail: String
+    private lateinit var userDetailsArray: ArrayList<UserDetails>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +41,7 @@ class ProfileFragment : Fragment() {
         auth = Firebase.auth
         db = Firebase.firestore
         postArrayList = ArrayList<Posts>()
-
+        userDetailsArray = ArrayList<UserDetails>()
             currentUserEmail = auth.currentUser!!.email.toString()
 
         getData()
@@ -113,32 +115,19 @@ class ProfileFragment : Fragment() {
 
         }
 
-        db.collection("UserDetails").whereEqualTo("userEmail",auth.currentUser!!.email).addSnapshotListener { value, error ->
-
-            if (error != null){
-                Toast.makeText(this.context, error.localizedMessage, Toast.LENGTH_LONG).show()
-            }else{
-                if (value != null){
-
-                    if (!value.isEmpty){
-
-                        val documents = value.documents
-
-
-                        for (document in documents){
-
-                            val userEmail = document.get("userEmail") as String
-                            val downloadUrl = document.get("userProfileImage") as String
-                            Glide.with(this).load(downloadUrl).into(binding.userEditImage)
-                        }
-
-
-                    }
-
+        db.collection("UserInfo").whereEqualTo("userEmail",auth.currentUser!!.email).get(Source.SERVER).addOnCompleteListener {
+                if(it.isSuccessful && !it.result.documents.isNullOrEmpty()) {
+                    val mail = it.result.documents[0].getString("userEmail") as String
+                    val image = it.result.documents[0].getString("userProfileImage") as String
+                    val userDetails = UserDetails(mail,image)
+                    Log.i("API-TEST", image)
+                    userDetailsArray.add(userDetails)
+                    Glide
+                        .with(requireActivity())
+                        .load(image)
+                        .into(binding.userEditImage)
                 }
             }
-
-        }
     }
 
 }
