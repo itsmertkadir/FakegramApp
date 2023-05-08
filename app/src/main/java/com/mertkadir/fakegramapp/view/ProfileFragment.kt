@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -127,9 +128,8 @@ class ProfileFragment : Fragment() {
                         for (document in documents){
 
                             val userEmail = document.get("userEmail") as String
-                            val downloadUrl = document.get("userProfileImage")as String
-                            Picasso.get().load(downloadUrl).into(binding.userEditImage)
-
+                            val downloadUrl = document.get("userProfileImage") as String
+                            Glide.with(this).load(downloadUrl).into(binding.userEditImage)
                         }
 
 
