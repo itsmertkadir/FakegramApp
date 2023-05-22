@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mertkadir.fakegramapp.R
 import com.mertkadir.fakegramapp.databinding.RecyclerRowBinding
 import com.mertkadir.fakegramapp.model.Posts
-
+import com.mertkadir.fakegramapp.model.UserDetails
 
 
 class ProfileFragmentRecyclerViewAdapter(val postList : ArrayList<Posts>) : RecyclerView.Adapter<ProfileFragmentRecyclerViewAdapter.PostsHolder>() {

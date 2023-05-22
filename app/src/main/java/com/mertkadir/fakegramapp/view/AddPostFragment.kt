@@ -161,6 +161,7 @@ class AddPostFragment : Fragment() {
                         post.put("userEmail", auth.currentUser!!.email!!)
                         post.put("date", Timestamp.now())
                         post.put("comment", binding.commentText.text.toString())
+                        post.put("userPostId",auth.currentUser!!.uid)
 
                         fireStore.collection("Posts").add(post).addOnSuccessListener {
                             val postFinishAction =

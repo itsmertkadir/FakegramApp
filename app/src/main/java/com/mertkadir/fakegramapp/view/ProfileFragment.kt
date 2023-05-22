@@ -34,7 +34,6 @@ class ProfileFragment : Fragment() {
     private lateinit var currentUserEmail: String
     private lateinit var userDetailsArray: ArrayList<UserDetails>
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -102,7 +101,8 @@ class ProfileFragment : Fragment() {
                             val comment = document.get("comment") as String
                             val userEmail = document.get("userEmail") as String
                             val downloadUrl = document.get("downloadUrl")as String
-                            val posts = Posts(userEmail,comment,downloadUrl)
+                            val userPostId = document.get("userPostId") as String
+                            val posts = Posts(userEmail,comment,downloadUrl,userPostId)
                             postArrayList.add(posts)
                         }
 
@@ -112,14 +112,15 @@ class ProfileFragment : Fragment() {
 
                 }
             }
-
         }
 
         db.collection("UserInfo").whereEqualTo("userEmail",auth.currentUser!!.email).get(Source.SERVER).addOnCompleteListener {
                 if(it.isSuccessful && !it.result.documents.isNullOrEmpty()) {
                     val mail = it.result.documents[0].getString("userEmail") as String
                     val image = it.result.documents[0].getString("userProfileImage") as String
-                    val userDetails = UserDetails(mail,image)
+                    val userName = it.result.documents[0].getString("userName") as String
+                    val userDetails = UserDetails(mail,image,userName)
+                    binding.userNameProfileText.text = userName
                     Log.i("API-TEST", image)
                     userDetailsArray.add(userDetails)
                     Glide

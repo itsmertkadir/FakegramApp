@@ -91,51 +91,57 @@ class ProfileSettingsFragment : Fragment() {
         }
 
         binding.editSave.setOnClickListener {
-            val editEmail = binding.userProfileEmailEdit.text.toString()
             val editPassword = binding.userProfilePassEdit.text.toString()
+            val userNameEdit = binding.userNameEditText.text.toString()
 
-            if (auth.currentUser != null){
-                val user = auth.currentUser
+            if (userNameEdit.equals(" ") && selectedImage == null){
+                Toast.makeText(this.context, "Set Email or Image", Toast.LENGTH_SHORT).show()
+            }else{
+                if (auth.currentUser != null){
+                    val user = auth.currentUser
+                    val userUUID = user!!.uid
+                    val imageName = "$userUUID.jpg"
 
-                val userUUID = user!!.uid
-                val imageName = "$userUUID.jpg"
+                    val dbReference = db.reference
+                    val imageReference: StorageReference = dbReference.child("userProfileImage").child(imageName)
 
-                val dbReference = db.reference
-                val imageReference: StorageReference = dbReference.child("userProfileImage").child(imageName)
+                    if (selectedImage != null) {
+                        imageReference.putFile(selectedImage!!).addOnSuccessListener {
 
-                if (selectedImage != null) {
-                    imageReference.putFile(selectedImage!!).addOnSuccessListener {
+                            val uploadImageReference = db.reference.child("userProfileImage").child(imageName)
 
-                        val uploadImageReference = db.reference.child("userProfileImage").child(imageName)
+                            uploadImageReference.downloadUrl.addOnSuccessListener {
 
-                        uploadImageReference.downloadUrl.addOnSuccessListener {
+                                val userProfileImageDownload = it.toString()
 
-                            val userProfileImageDownload = it.toString()
-
-                            val userDetail = HashMap<String, Any>()
-                            userDetail.put("userEmail",user!!.email!!)
-                            userDetail.put("userUUID", userUUID)
-                            userDetail.put("userProfileImage",userProfileImageDownload)
+                                val userDetail = HashMap<String, Any>()
+                                userDetail.put("userEmail",user!!.email!!)
+                                userDetail.put("userUUID", userUUID)
+                                userDetail.put("userName",userNameEdit)
+                                userDetail.put("userProfileImage",userProfileImageDownload)
 
 
 
 
-                            fireStore.collection("UserInfo").document(auth.currentUser!!.uid).set(userDetail).addOnSuccessListener {
+                                fireStore.collection("UserInfo").document(auth.currentUser!!.uid).set(userDetail).addOnSuccessListener {
 
-                                Toast.makeText(this.context, "Update User Details", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {
-                                Toast.makeText(this.context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this.context, "Update User Details", Toast.LENGTH_SHORT).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(this.context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                }
+
+
                             }
 
-
+                        }.addOnFailureListener {
+                            Toast.makeText(this.context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                         }
-
-                    }.addOnFailureListener {
-                        Toast.makeText(this.context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }
-                }
 
+                }
             }
+
+
 
         }
 
@@ -214,7 +220,9 @@ class ProfileSettingsFragment : Fragment() {
                 if(it.isSuccessful && !it.result.documents.isNullOrEmpty()) {
                     val mail = it.result.documents[0].getString("userEmail") as String
                     val image = it.result.documents[0].getString("userProfileImage") as String
-                    val userDetails = UserDetails(mail,image)
+                    val userName = it.result.documents[0].getString("userName") as String
+                    val userDetails = UserDetails(mail,image,userName)
+                    binding.userNameTextView.text = userName
                     Log.i("API-TEST", image)
                     userDetailsArray.add(userDetails)
                     Glide

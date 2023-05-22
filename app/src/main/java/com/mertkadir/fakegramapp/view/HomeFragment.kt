@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var postArrayList : ArrayList<Posts>
     private lateinit var homeFragmentAdapter : HomeFragmentRecyclerViewAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,7 +35,6 @@ class HomeFragment : Fragment() {
         postArrayList = ArrayList<Posts>()
 
         getData()
-
 
 
     }
@@ -86,7 +86,8 @@ class HomeFragment : Fragment() {
                             val comment = document.get("comment") as String
                             val userEmail = document.get("userEmail") as String
                             val downloadUrl = document.get("downloadUrl")as String
-                            val posts = Posts(userEmail,comment,downloadUrl)
+                            val userPostId = document.get("userPostId") as String
+                            val posts = Posts(userEmail,comment,downloadUrl,userPostId)
                             postArrayList.add(posts)
                         }
 

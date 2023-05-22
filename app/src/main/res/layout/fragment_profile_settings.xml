@@ -8,6 +8,19 @@
     tools:context=".view.ProfileSettingsFragment">
 
 
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:ems="10"
+        android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImageEdit" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageEdit"
         android:layout_width="150dp"
@@ -20,14 +33,13 @@
         app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
 
     <EditText
-        android:id="@+id/userProfileEmailEdit"
+        android:id="@+id/userNameProfileText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEditPassword" />
 
@@ -35,14 +47,60 @@
         android:id="@+id/userProfilePassEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
         android:inputType="text"
         android:textColorHint="#A31111"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userProfileEmailEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameProfileText" />
+
+    <TextView
+        android:id="@+id/textViewEditEmail"
+        android:layout_width="209dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="4dp"
+        android:text="Edit Password"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/userProfilePassEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewEditPassword"
+        android:layout_width="209dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="192dp"
+        android:text="Edit Email"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImageEdit" />
+
+    <TextView
+        android:id="@+id/textViewUserNameEdit"
+        android:layout_width="209dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="80dp"
+        android:text="User Name"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImageEdit" />
+
+    <Button
+        android:id="@+id/editSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:text="SAVE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userProfilePassEdit" />
 
     <Button
         android:id="@+id/signOut"
@@ -53,18 +111,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSave" />
-
-    <Button
-        android:id="@+id/editSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:text="SAVE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userProfilePassEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/editSave"
+        app:layout_constraintVertical_bias="0.173" />
 
     <ImageView
         android:id="@+id/exitSettings"
@@ -78,27 +126,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewEditEmail"
-        android:layout_width="209dp"
-        android:layout_height="34dp"
-        android:text="Edit Password"
+        android:id="@+id/userNameTextView"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="EMPTY"
         android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/userProfilePassEdit"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewEditPassword"
-        android:layout_width="209dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="68dp"
-        android:text="Edit Email"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userImageEdit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,15 +39,16 @@
             android:background="@drawable/userprofileimage"></de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
-            android:id="@+id/userProfileEmailEdit"
+            android:id="@+id/userNameProfileText"
             android:layout_width="276dp"
             android:layout_height="36dp"
             android:layout_marginTop="12dp"
             android:gravity="center"
+            android:maxLength="20"
             android:maxLines="1"
             android:text="mrkadir9395"
             android:textAlignment="center"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

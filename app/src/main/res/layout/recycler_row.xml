@@ -7,11 +7,22 @@
     android:layout_height="wrap_content"
     >
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/postUserImage"
+        android:layout_width="50dp"
+
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/userEmailTextView"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
         android:id="@+id/userEmailTextView"
-        android:layout_width="344dp"
-        android:layout_height="32dp"
+        android:layout_width="277dp"
+        android:layout_height="36dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="User Email"
@@ -20,7 +31,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageView" />
 
     <ImageView
